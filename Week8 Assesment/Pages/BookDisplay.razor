@@ -1,0 +1,56 @@
+﻿
+
+@if (books.Count > 0)
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Authors</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var book in books)
+            {
+                <tr>
+                    <td>@book.Title</td>
+                    <td>@book.Description</td>
+                    <td>@string.Join(", ", book.Authors)</td>
+                    <td>
+              @*          <button class="btn btn-primary" @onclick="EditBook(book)">Edit</button>
+                        <button class="btn btn-danger" @onclick="DeleteBook(book)">Delete</button>*@
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>No books found.</p>
+}
+
+@code {
+    [Parameter]
+    public Book SelectedBook { get; set; }
+
+    [Parameter]
+    public EventCallback<Book> SelectedBookChanged { get; set; }
+
+    private List<Book> books = new List<Book>();
+
+    // Sample book data
+    private void InitializeData()
+    {
+        books.Add(new Book { Title = "Book 1", Description = "Description 1", Authors = new List<string> { "Author 1", "Author 2" } });
+        books.Add(new Book { Title = "Book 2", Description = "Description 2", Authors = new List<string> { "Author 3" } });
+        books.Add(new Book { Title = "Book 3", Description = "Description 3", Authors = new List<string> { "Author 4", "Author 5" } });
+    }
+
+    protected override void OnInitialized()
+    {
+        InitializeData();
+    }
+}

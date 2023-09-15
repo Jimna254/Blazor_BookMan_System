@@ -1,0 +1,38 @@
+﻿@if (Book == null)
+{
+    <p>Book is null. Cannot render component.</p>
+}
+else
+{
+    <h4>@(Book == null ? "Add Book" : "Edit Book")</h4>
+   
+}
+<div class="form-group">
+    <label for="title">Title</label>
+    <input class="form-control" id="title" @bind="Book.Title" />
+</div>
+<div class="form-group">
+    <label for="description">Description</label>
+    <input class="form-control" id="description" @bind="Book.Description" />
+</div>
+<div class="form-group">
+    <label for="authors">Authors (comma-separated)</label>
+    <input class="form-control" id="authors" @bind="authorsInput" />
+</div>
+@*<button class="btn btn-success" @onclick="savebook">@(Book == null ? "add" : "update")</button>
+<button class="btn btn-secondary" @onclick="canceledit">cancel</button>
+*@
+@code {
+    [Parameter]
+    public Book Book { get; set; }
+
+  
+
+    [Parameter]
+    public EventCallback<Book> BookChanged { get; set; }
+
+   
+
+
+    private string authorsInput = "";
+}
