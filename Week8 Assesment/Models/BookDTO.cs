@@ -6,6 +6,6 @@
 		public string Title { get; set; } = string.Empty;
 
 		public string Description { get; set; }= string.Empty;
-		public List<AuthorDTO>? Authors { get; set; }
+		public List<AuthorDTO> Authors { get; set; } = new List<AuthorDTO> ();
 	}
 }

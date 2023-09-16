@@ -7,24 +7,28 @@
     <label for="title">Title</label>
     <InputText class="form-control" id="title" @bind-Value="Book.Title" />
      <ValidationMessage For="@(()=>Book.Title)" />
-  
 </div>
 <div class="form-group">
     <label for="description">Description</label>
     <InputTextArea class="form-control" id="description" @bind-Value="Book.Description" />
     <ValidationMessage For="@(() => Book.Description)"/>
 </div>
-<div class="form-group">
-    <label for="authors">Authors</label>
-    <InputText class="form-control" id="authors" @bind-Value="Author.Name" />
-    <ValidationMessage For="@(() => Book.Authors)"/>
-</div>
-
- <button type="button" class="bg-success" onclick="@(()=>Book.Authors.Add(new AuthorDTO()))">Add Author</button>
+@foreach(var authors in Book.Authors)
+{
+        <div class="form-group">
+            <label for="authors">Authors</label>
+            <InputText class="form-control" id="authors" @bind-Value="authors.Name" />
+            <ValidationMessage For="@(() => authors.Name)" />
+        </div>
         
-            <button type="submit" class="bg-primary">
+ }
+    
+
+    <button type="button" class="bg-success" onclick="@(()=>Book.Authors.Add(new AuthorDTO()))">Add Author</button>
+
+    <button type="submit" class="bg-primary">
            @(isEdit ? "Edit" : "Add") Book
-            </button>
+     </button>
 
 
 </EditForm>

@@ -1,6 +1,9 @@
-﻿@page "/"
+﻿
+
 
 <Add_EditBook EditingBook="EditingBook" OnBookAdded="AddNewBook" OnBookChanged="UpdateBook" />
+
+<h3>Book List</h3>
 @if (books.Count > 0)
 {
    
@@ -22,14 +25,22 @@
                     <td>@book.Title</td>
                     <td>@book.Description</td>
                     <td>
-                    <ul>
-                        @foreach (var author in book.Authors)
-                        {
-                            <li>
-                                @author.Name
-                            </li>
-                        }
-                    </ul>
+                    
+                       @if (book != null && book.Authors != null)
+                          {
+                           <ul>
+                              @foreach (var author in book.Authors)
+                               {
+                               <li>@author.Name</li>
+                               }
+                         </ul>
+                            }
+                      else
+                       {
+                         <p>No authors available.</p>
+                       }
+
+                   
                     </td>
                     <td>
                         <button class="btn btn-primary" @onclick="(() => EditBook(book))">Edit</button>
