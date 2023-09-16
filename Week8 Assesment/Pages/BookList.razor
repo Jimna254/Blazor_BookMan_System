@@ -1,19 +1,14 @@
-﻿@page "/"
-
+﻿@*@page "/"*@
+<Header/>
 <h3>Book List</h3>
 
 
-<BookDisplay @bind-SelectedBook="selectedBook" />
+<BookDisplay/>
 
-<button class="btn btn-primary" @onclick="AddBook">Add Book</button>
+<button class="btn btn-primary">Add Book</button>
 
-<Add_EditBook @bind-Book="selectedBook" />
+<Add_EditBook/>
 
 @code {
-    private Book selectedBook = null;
-
-    private void AddBook()
-    {
-        selectedBook = new Book(); // Initialize a new book for adding
-    }
+  
 }
