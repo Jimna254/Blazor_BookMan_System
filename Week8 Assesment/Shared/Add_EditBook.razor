@@ -1,4 +1,4 @@
-﻿
+﻿@inject IJSRuntime JSRuntime
 
 <EditForm Model="Book" OnValidSubmit="HandleSubmit">
     
@@ -24,11 +24,11 @@
  }
     
 
-    <button type="button" class="bg-success" onclick="@(()=>Book.Authors.Add(new AuthorDTO()))">Add Author</button>
+    <button type="button" class="btn btn-success mt-3" onclick="@(()=>Book.Authors.Add(new AuthorDTO()))">Add Author</button>
 
-    <button type="submit" class="bg-primary">
+    <button type="submit" class="btn btn-primary mt-3 ">
            @(isEdit ? "Edit" : "Add") Book
-     </button>
+     </button>   
 
 
 </EditForm>
@@ -58,11 +58,13 @@
     {
         await OnBookAdded.InvokeAsync(Book);
         Book = new BookDTO();
+        AddSuccess();
     }
     public async Task EditBook()
     {
         await OnBookChanged.InvokeAsync(Book);
         Book = new BookDTO();
+        EditSuccess();
     }
 
     //This bool is to help in togling the form from Adding to Editting
@@ -90,7 +92,18 @@
         }
     }
 
-  
+    private void AddSuccess()
+    {
+        JSRuntime.InvokeVoidAsync("showAlert", "The Book was added successfully", "success");
+    }
+    private void EditSuccess()
+    {
+        JSRuntime.InvokeVoidAsync("showAlert", "The book was edited successfully", "success");
+    }
+    private void showError()
+    {
+        JSRuntime.InvokeVoidAsync("showAlert", "OOOOPs!", "error");
+    }
 
     
 
